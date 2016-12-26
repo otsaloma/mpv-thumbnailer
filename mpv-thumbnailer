@@ -37,7 +37,9 @@ fi
 
 TEMPDIR=$(mktemp -d)
 mpv --really-quiet \
-    --vo=image:format=jpg:outdir=$TEMPDIR \
+    --vo=image \
+    --vo-image-format=jpg \
+    --vo-image-outdir=$TEMPDIR \
     --aid=no \
     --sid=no \
     --start=20% \
