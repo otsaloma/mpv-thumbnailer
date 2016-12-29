@@ -36,15 +36,22 @@ the output image file to write. SIZE is optional and defaults to 128."
 fi
 
 TEMPDIR=$(mktemp -d)
-mpv --really-quiet \
-    --vo=image \
-    --vo-image-format=jpg \
-    --vo-image-outdir=$TEMPDIR \
-    --aid=no \
-    --sid=no \
-    --start=20% \
-    --frames=5 \
-    "$INPUT"
+
+# Seeking might fail with some semi-broken files.
+# Fall back to thumbnailing from the start.
+for START in 20% 0; do
+    mpv --really-quiet \
+        --vo=image \
+        --vo-image-format=jpg \
+        --vo-image-outdir=$TEMPDIR \
+        --aid=no \
+        --sid=no \
+        --start=$START \
+        --frames=5 \
+        "$INPUT"
+
+    [ $(ls $TEMPDIR | wc -l) = 5 ] && break;
+done
 
 convert -thumbnail "$SIZEx$SIZE>" $TEMPDIR/*5.jpg "$OUTPUT"
 rm $TEMPDIR/*.jpg && rmdir $TEMPDIR
