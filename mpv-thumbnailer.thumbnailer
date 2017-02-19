@@ -3,4 +3,4 @@ TryExec=mpv-thumbnailer
 Exec=mpv-thumbnailer -i %i -o %o -s %s
 # All video/* entries from mpv's desktop file.
 # https://github.com/mpv-player/mpv/blob/master/etc/mpv.desktop
-MimeType=video/mpeg;video/x-mpeg;video/x-mpeg2;video/mp4;video/msvideo;video/x-msvideo;video/ogg;video/quicktime;video/vnd.rn-realvideo;video/x-ms-afs;video/x-ms-asf;video/x-ms-wmv;video/x-ms-wmx;video/x-ms-wvxvideo;video/x-avi;video/x-fli;video/x-flv;video/x-theora;video/x-matroska;video/webm;video/x-ogm+ogg;
+MimeType=video/mpeg;video/x-mpeg;video/x-mpeg2;video/mp4;video/msvideo;video/x-msvideo;video/ogg;video/quicktime;video/vnd.rn-realvideo;video/x-ms-afs;video/x-ms-asf;video/x-ms-wmv;video/x-ms-wmx;video/x-ms-wvxvideo;video/x-avi;video/x-fli;video/x-flv;video/x-theora;video/x-matroska;video/webm;video/x-ogm+ogg;video/mp2t;

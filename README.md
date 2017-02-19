@@ -19,4 +19,4 @@ the output image file to write. SIZE is optional and defaults to 128.
 ```
 
 mpv-thumbnailer requires [mpv](https://mpv.io/) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
