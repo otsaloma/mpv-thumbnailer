@@ -42,16 +42,18 @@ TEMPDIR=$(mktemp -d)
 for START in 20% 0; do
     mpv --really-quiet \
         --vo=image \
-        --vo-image-format=jpg \
+        --vo-image-format=png \
+        --vo-image-png-compression=0 \
+        --vo-image-png-filter=0 \
         --vo-image-outdir=$TEMPDIR \
         --aid=no \
         --sid=no \
         --start=$START \
-        --frames=5 \
+        --frames=3 \
         "$INPUT"
 
-    [ $(ls $TEMPDIR | wc -l) = 5 ] && break;
+    [ $(ls $TEMPDIR | wc -l) = 3 ] && break;
 done
 
-convert -thumbnail "$SIZEx$SIZE>" $TEMPDIR/*5.jpg "$OUTPUT"
-rm $TEMPDIR/*.jpg && rmdir $TEMPDIR
+convert -thumbnail "$SIZEx$SIZE>" $TEMPDIR/*3.png "$OUTPUT"
+rm $TEMPDIR/*.png && rmdir $TEMPDIR
