@@ -27,7 +27,7 @@ while getopts i:o:s: OPTION; do
     esac
 done
 if [ ! -f "$INPUT" ] || [ -z "$OUTPUT" ] || [ -z "$SIZE" ]; then
-    echo "Usage: mpv-thumbnailer -i VIDEO -o THUMBNAIL [ -s SIZE]
+    echo "Usage: mpv-thumbnailer -i VIDEO -o THUMBNAIL [-s SIZE]
 
 VIDEO is the input file to generate a thumbnail from and THUMBNAIL is
 the output image file to write. SIZE is optional and defaults to 128."

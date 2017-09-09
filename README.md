@@ -12,7 +12,7 @@ works with GNOME's Nautilus. Support for other platforms or file
 browsers should be easy to add.
 
 ```
-Usage: mpv-thumbnailer -i VIDEO -o THUMBNAIL [ -s SIZE]
+Usage: mpv-thumbnailer -i VIDEO -o THUMBNAIL [-s SIZE]
 
 VIDEO is the input file to generate a thumbnail from and THUMBNAIL is
 the output image file to write. SIZE is optional and defaults to 128.
