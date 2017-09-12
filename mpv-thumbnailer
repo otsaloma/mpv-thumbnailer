@@ -41,6 +41,7 @@ TEMPDIR=$(mktemp -d)
 # Fall back to thumbnailing from the start.
 for START in 20% 0; do
     mpv --really-quiet \
+        --no-config \
         --vo=image \
         --vo-image-format=png \
         --vo-image-png-compression=0 \
