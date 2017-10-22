@@ -8,6 +8,9 @@ THUMBDIR = $(DESTDIR)$(PREFIX)/share/thumbnailers
 mpv-thumbnailer: mpv-thumbnailer.rs
 	rustc mpv-thumbnailer.rs
 
+clean:
+	rm mpv-thumbnailer
+
 install:
 	test -s mpv-thumbnailer
 	mkdir -p $(BINDIR)
@@ -16,4 +19,4 @@ install:
 	mkdir -p $(THUMBDIR)
 	cp mpv-thumbnailer.thumbnailer $(THUMBDIR)
 
-.PHONY: install
+.PHONY: clean install
