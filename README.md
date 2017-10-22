@@ -12,11 +12,18 @@ works with GNOME's Nautilus. Support for other platforms or file
 browsers should be easy to add.
 
 ```
-Usage: mpv-thumbnailer -i VIDEO -o THUMBNAIL [-s SIZE]
+Usage: mpv-thumbnailer VIDEO THUMBNAIL SIZE
 
-VIDEO is the input file to generate a thumbnail from and THUMBNAIL is
-the output image file to write. SIZE is optional and defaults to 128.
+VIDEO is the input video file to generate a thumbnail from.
+THUMBNAIL is the output image file to write.
+SIZE is the pixel width/height of the thumbnail image.
 ```
 
-mpv-thumbnailer requires [mpv](https://mpv.io/) and
-[ImageMagick](https://www.imagemagick.org/).
+Development Notes
+=================
+
+Since version 3.26 GNOME runs thumbnailers sandboxed via Bubblewrap. Any
+changes should be tested to adhere to those sandbox rules, which
+currently seem to only be documented in the below bug report.
+
+<https://bugzilla.gnome.org/show_bug.cgi?id=774497>

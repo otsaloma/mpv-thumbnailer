@@ -1,5 +1,8 @@
 To install, run
 
 ```bash
-make PREFIX=... install
+make
+sudo make PREFIX=... install
 ```
+
+For the `make` step you need the Rust compiler `rustc`.
