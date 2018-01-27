@@ -19,8 +19,18 @@ THUMBNAIL is the output image file to write.
 SIZE is the pixel width/height of the thumbnail image.
 ```
 
-Development Notes
-=================
+## Installation
+
+To install, run
+
+```bash
+make
+make PREFIX=... install
+```
+
+For the `make` step you need the Rust compiler `rustc`.
+
+## Development Notes
 
 Since version 3.26 GNOME runs thumbnailers sandboxed via Bubblewrap. Any
 changes should be tested to adhere to those sandbox rules, which
