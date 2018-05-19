@@ -31,7 +31,7 @@ fn thumbnail(input: &String, output: &String, size: &String, start: &String) -> 
         .arg("--no-config")
         .arg("--aid=no")
         .arg("--sid=no")
-        .arg(format!("--vf=scale={}:-2", size))
+        .arg(format!("--vf=scale={}:{}/dar", size, size))
         .arg(format!("--start={}", start))
         .arg("--frames=1")
         .arg(format!("--o={}", output))
