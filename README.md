@@ -7,6 +7,11 @@ player and are happy with its playback, you'll likely be happy with
 mpv-thumbnailer's thumbnails. File format support should be good and
 aspect ratio errors rare.
 
+mpv-thumbnailer generates multiple thumbnails per file and selects the
+largest of those files, thus hopefully avoiding the common problem of
+thumbnailing boring all-black frames. As a downside, this means that
+mpv-thumbnailer is somewhat slow.
+
 mpv-thumbnailer includes and installs a thumbnailer definition file that
 works with GNOME's Nautilus. Support for other platforms or file
 browsers should be easy to add.
