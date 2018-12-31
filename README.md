@@ -30,7 +30,7 @@ To install, run
 
 ```bash
 make
-make PREFIX=... install
+make PREFIX=/usr/local install
 ```
 
 For the `make` step you need the Rust compiler `rustc`.
