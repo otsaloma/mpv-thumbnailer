@@ -9,7 +9,7 @@ mpv-thumbnailer: mpv-thumbnailer.rs
 	rustc mpv-thumbnailer.rs
 
 clean:
-	rm mpv-thumbnailer
+	rm -f mpv-thumbnailer
 
 install:
 	test -s mpv-thumbnailer
