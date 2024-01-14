@@ -2,4 +2,4 @@
 TryExec=mpv-thumbnailer
 Exec=mpv-thumbnailer %i %o %s
 # https://github.com/mpv-player/mpv/blob/master/etc/mpv.desktop
-MimeType=video/3gp;video/3gpp;video/3gpp2;video/avi;video/divx;video/dv;video/fli;video/flv;video/mkv;video/mp2t;video/mp4;video/mp4v-es;video/mpeg;video/msvideo;video/ogg;video/quicktime;video/vnd.divx;video/vnd.mpegurl;video/vnd.rn-realvideo;video/webm;video/x-avi;video/x-flc;video/x-flic;video/x-flv;video/x-m4v;video/x-matroska;video/x-mpeg2;video/x-mpeg3;video/x-ms-afs;video/x-ms-asf;video/x-ms-wmv;video/x-ms-wmx;video/x-ms-wvxvideo;video/x-msvideo;video/x-ogm;video/x-ogm+ogg;video/x-theora;video/x-theora+ogg
+MimeType=video/mpeg;video/x-mpeg2;video/x-mpeg3;video/mp4v-es;video/x-m4v;video/mp4;video/divx;video/vnd.divx;video/msvideo;video/x-msvideo;video/ogg;video/quicktime;video/vnd.rn-realvideo;video/x-ms-afs;video/x-ms-asf;video/x-ms-wmv;video/x-ms-wmx;video/x-ms-wvxvideo;video/x-avi;video/avi;video/x-flic;video/fli;video/x-flc;video/flv;video/x-flv;video/x-theora;video/x-theora+ogg;video/x-matroska;video/mkv;video/webm;video/x-ogm;video/x-ogm+ogg;video/mp2t;video/vnd.mpegurl;video/3gp;video/3gpp;video/3gpp2;video/dv;video/vnd.avi;
