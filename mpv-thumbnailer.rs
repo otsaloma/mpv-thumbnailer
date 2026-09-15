@@ -17,13 +17,13 @@ fn hash<T: Hash>(data: &T) -> u64 {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() < 4 {
+    let [_, input, output, size, ..] = &args[..] else {
         println!("Usage: mpv-thumbnailer VIDEO THUMBNAIL SIZE\n");
         println!("VIDEO is the input video file to generate a thumbnail from.");
         println!("THUMBNAIL is the output image file to write.");
         println!("SIZE is the pixel width/height of the thumbnail image.");
         process::exit(1);
-    }
+    };
     // Thumbnail multiple times and copy the largest file as output,
     // assuming it's the least likely to be a boring all-black frame.
     // Note that seeking might fail with some semi-broken files, so
@@ -33,11 +33,11 @@ fn main() {
     for start in ["25%", "20%", "15%", "0"] {
         let mut path = env::temp_dir();
         path.push(format!("mpv-thumbnailer-{}-{}.png",
-                          hash(&args[1]),
+                          hash(input),
                           start.replace("%", "")));
 
         let fname = String::from(path.to_string_lossy());
-        let status = thumbnail(&args[1], &fname, &args[3], &start.to_string());
+        let status = thumbnail(input, &fname, size, &start.to_string());
         if !status.success() || !path.exists() { continue; }
         let metadata = path.metadata().expect("failed to get metadata");
         fnames.push(fname.clone());
@@ -47,7 +47,7 @@ fn main() {
     if fnames.len() == 0 { process::exit(1); }
     let max_fsize = fsizes.iter().max().unwrap();
     let max_index = fsizes.iter().position(|&x| x == *max_fsize).unwrap();
-    fs::copy(&fnames[max_index], &args[2]).expect("failed to copy file");
+    fs::copy(&fnames[max_index], output).expect("failed to copy file");
     for (i, fname) in fnames.iter().enumerate() {
         println!("{:?}: {:?}", fnames[i], fsizes[i]);
         fs::remove_file(fname).expect("failed to remove file");
