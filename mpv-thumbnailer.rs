@@ -1,19 +1,13 @@
 // -*- coding: utf-8-unix -*-
 
-use std::collections::hash_map::DefaultHasher;
 use std::env;
 use std::fs;
+use std::hash::DefaultHasher;
 use std::hash::Hash;
 use std::hash::Hasher;
 use std::process;
 use std::process::Command;
 use std::process::ExitStatus;
-
-fn hash<T: Hash>(data: &T) -> u64 {
-    let mut hasher = DefaultHasher::new();
-    data.hash(&mut hasher);
-    hasher.finish()
-}
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -24,6 +18,9 @@ fn main() {
         println!("SIZE is the pixel width/height of the thumbnail image.");
         process::exit(1);
     };
+    let mut hasher = DefaultHasher::new();
+    input.hash(&mut hasher);
+    let id = hasher.finish();
     // Thumbnail multiple times and copy the largest file as output,
     // assuming it's the least likely to be a boring all-black frame.
     // Note that seeking might fail with some semi-broken files, so
@@ -33,7 +30,7 @@ fn main() {
     for start in ["25%", "20%", "15%", "0"] {
         let mut path = env::temp_dir();
         path.push(format!("mpv-thumbnailer-{}-{}.png",
-                          hash(input),
+                          id,
                           start.replace("%", "")));
 
         let fname = String::from(path.to_string_lossy());
