@@ -26,25 +26,23 @@ fn main() {
     // assuming it's the least likely to be a boring all-black frame.
     // Note that seeking might fail with some semi-broken files, so
     // always fall back to thumbnailing from the start.
-    let mut fnames = Vec::new();
-    let mut fsizes = Vec::new();
+    let mut thumbnails = Vec::new();
     for start in ["25%", "20%", "15%", "0"] {
         let path = env::temp_dir().join(
             format!("mpv-thumbnailer-{}-{}.png", id, start.replace("%", "")));
         let status = thumbnail(input, &path, size, start);
         if !status.success() || !path.exists() { continue; }
-        let metadata = path.metadata().expect("failed to get metadata");
-        fnames.push(path);
-        fsizes.push(metadata.len().clone());
-        if fnames.len() >= 3 { break; }
+        let fsize = path.metadata().expect("failed to get metadata").len();
+        thumbnails.push((path, fsize));
+        if thumbnails.len() >= 3 { break; }
     }
-    if fnames.len() == 0 { process::exit(1); }
-    let max_fsize = fsizes.iter().max().unwrap();
-    let max_index = fsizes.iter().position(|&x| x == *max_fsize).unwrap();
-    fs::copy(&fnames[max_index], output).expect("failed to copy file");
-    for (i, fname) in fnames.iter().enumerate() {
-        println!("{:?}: {:?}", fnames[i], fsizes[i]);
-        fs::remove_file(fname).expect("failed to remove file");
+    let Some((largest, _)) = thumbnails.iter().max_by_key(|(_, fsize)| fsize) else {
+        process::exit(1);
+    };
+    fs::copy(largest, output).expect("failed to copy file");
+    for (path, fsize) in &thumbnails {
+        println!("{:?}: {:?}", path, fsize);
+        fs::remove_file(path).expect("failed to remove file");
     }
 }
 
