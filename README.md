@@ -1,5 +1,4 @@
-mpv-thumbnailer
-===============
+# mpv-thumbnailer
 
 A simple video thumbnailer that uses [mpv](https://mpv.io/), primarily
 intended to be used by a file browser. If you use mpv as your video

@@ -12,7 +12,7 @@ use std::process::ExitStatus;
 fn hash<T: Hash>(data: &T) -> u64 {
     let mut hasher = DefaultHasher::new();
     data.hash(&mut hasher);
-    return hasher.finish();
+    hasher.finish()
 }
 
 fn main() {
@@ -30,7 +30,7 @@ fn main() {
     // always fall back to thumbnailing from the start.
     let mut fnames = Vec::new();
     let mut fsizes = Vec::new();
-    for start in vec!["25%", "20%", "15%", "0"] {
+    for start in ["25%", "20%", "15%", "0"] {
         let mut path = env::temp_dir();
         path.push(format!("mpv-thumbnailer-{}-{}.png",
                           hash(&args[1]),
@@ -52,13 +52,12 @@ fn main() {
         println!("{:?}: {:?}", fnames[i], fsizes[i]);
         fs::remove_file(fname).expect("failed to remove file");
     }
-    process::exit(0);
 }
 
 fn thumbnail(input: &String, output: &String, size: &String, start: &String) -> ExitStatus {
     // XXX: We can't seem to set scaling by the maximum dimension,
     // so for portrait videos we get a height over the requested size.
-    return Command::new("mpv")
+    Command::new("mpv")
         .arg("--really-quiet")
         .arg("--no-config")
         .arg("--aid=no")
@@ -69,6 +68,5 @@ fn thumbnail(input: &String, output: &String, size: &String, start: &String) -> 
         .arg(format!("--o={}", output))
         .arg(format!("{}", input))
         .status()
-        .expect("failed to execute mpv process");
-
+        .expect("failed to execute mpv process")
 }
