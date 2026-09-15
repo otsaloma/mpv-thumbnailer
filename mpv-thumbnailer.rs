@@ -5,6 +5,7 @@ use std::fs;
 use std::hash::DefaultHasher;
 use std::hash::Hash;
 use std::hash::Hasher;
+use std::path::Path;
 use std::process;
 use std::process::Command;
 use std::process::ExitStatus;
@@ -28,16 +29,12 @@ fn main() {
     let mut fnames = Vec::new();
     let mut fsizes = Vec::new();
     for start in ["25%", "20%", "15%", "0"] {
-        let mut path = env::temp_dir();
-        path.push(format!("mpv-thumbnailer-{}-{}.png",
-                          id,
-                          start.replace("%", "")));
-
-        let fname = String::from(path.to_string_lossy());
-        let status = thumbnail(input, &fname, size, &start.to_string());
+        let path = env::temp_dir().join(
+            format!("mpv-thumbnailer-{}-{}.png", id, start.replace("%", "")));
+        let status = thumbnail(input, &path, size, start);
         if !status.success() || !path.exists() { continue; }
         let metadata = path.metadata().expect("failed to get metadata");
-        fnames.push(fname.clone());
+        fnames.push(path);
         fsizes.push(metadata.len().clone());
         if fnames.len() >= 3 { break; }
     }
@@ -51,7 +48,7 @@ fn main() {
     }
 }
 
-fn thumbnail(input: &String, output: &String, size: &String, start: &String) -> ExitStatus {
+fn thumbnail(input: &str, output: &Path, size: &str, start: &str) -> ExitStatus {
     // XXX: We can't seem to set scaling by the maximum dimension,
     // so for portrait videos we get a height over the requested size.
     Command::new("mpv")
@@ -62,8 +59,8 @@ fn thumbnail(input: &String, output: &String, size: &String, start: &String) -> 
         .arg(format!("--vf=scale={}:{}/dar", size, size))
         .arg(format!("--start={}", start))
         .arg("--frames=1")
-        .arg(format!("--o={}", output))
-        .arg(format!("{}", input))
+        .arg(format!("--o={}", output.display()))
+        .arg(input)
         .status()
         .expect("failed to execute mpv process")
 }
